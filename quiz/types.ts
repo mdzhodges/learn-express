@@ -1,3 +1,12 @@
 import { Request } from 'express';
 
-// define relevant types here
+/**
+ * A type that represents a user object
+ */
+interface User {
+    id: number;
+    firstName: string;
+    lastName: string;
+    username: string;
+    email: string;
+}
