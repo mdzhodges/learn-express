@@ -2,15 +2,8 @@ import {promises as fsPromises} from 'fs';
 import path from 'path';
 import express, {Express, Request, Response, NextFunction} from 'express';
 import cors from 'cors';
-import User from "../ui-app/src/viewModels/user";
-
-
-/**
- * A type that represents the request received by the server
- */
-interface UserRequest extends Request {
-    users?: User[];
-}
+import {User} from "./types";
+import {UserRequest} from "./types";
 
 // the server application object created by the express server
 const app: Express = express();
@@ -71,14 +64,9 @@ app.use('/write/adduser', addMsgToRequest);
 //search for user
 app.get('/read/username/:name', (req: UserRequest, res: Response) => {
     const name = req.params.name;
-    console.log(name);
-
     let users_with_name = users?.filter(function(user) {
-        console.log(user)
         return user.username === name;
     })
-
-    console.log(users_with_name);
 
     if(users_with_name?.length === 0 ) {
         res.send({
